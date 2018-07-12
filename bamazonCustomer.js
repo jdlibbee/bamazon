@@ -34,7 +34,7 @@ function shop() {
                 message: "What would you like to purchase?",
                 name: "buying",
                 choices: [res[i]]
-            }).then)function(buy) {
+            }).then(function (buy) {
                 inquirer.prompt({
                     type: "input",
                     message: "How Much would you like to purchase?",
@@ -48,7 +48,7 @@ function shop() {
                         shop();
                     }
                 })
-            }
-}
-    })
+            });
+        };
+    });
 }
