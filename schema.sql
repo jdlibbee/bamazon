@@ -19,3 +19,15 @@ CREATE TABLE products
     PRIMARY KEY
     (item_id)
 );
+
+    CREATE TABLE departments
+    (
+        department_id int(255) NOT NULL
+        auto_increment,
+    department_name varchar
+        (30) NOT NULL,
+    over_head_costs DECIMAL
+        (10, 2) NOT NULL,
+    PRIMARY KEY
+        (department_id)
+);
