@@ -26,29 +26,66 @@ connection.connect(function (err) {
 
 //functions for inquirer options. 
 function shop() {
-    connection.query("SELECT item_id, product_name from products", function (err, res) {
+    connection.query("SELECT * from products", function (err, res) {
         if (err) throw err;
-        for (var i = 0; i < res.lenght; i++) {
-            inquirer.prompt({
-                type: "list",
-                message: "What would you like to purchase?",
-                name: "buying",
-                choices: [res[i]]
-            }).then(function (buy) {
-                inquirer.prompt({
-                    type: "input",
-                    message: "How Much would you like to purchase?",
-                    name: "quantity",
-                    validate: function (value) {
-                        if (isNaN(value) === false) {
-                            return true;
-                        }
-                        return false;
-                        console.log("You did not enter a valid quantity.");
+        inquirer.prompt([{
+            type: "list",
+            message: "What would you like to purchase?",
+            name: "buying",
+            choices: function () {
+                var prods = [];
+                for (var i = 0; i < res.length; i++) {
+                    prods.push(res[i].product_name);
+                }
+                return prods;
+            }
+        },
+        {
+            type: "input",
+            message: `What quantity would you like to purchase?`,
+            name: "quantity",
+            validate: function (value) {
+                if (isNaN(value) === false) {
+                    return true;
+                }
+                return false;
+            }
+        }
+        ]).then(function (buy) {
+            var choice;
+            var currentQty;
+            var newQty;
+            var total;
+            var purchasing = parseInt(buy.quantity);
+            for (var i = 0; i < res.length; i++) {
+                if (res[i].product_name === buy.buying) {
+                    choice = res[i];
+                    currentQty = +(choice.stock_quantity);
+                    newQty = currentQty - purchasing;
+                    total = parseInt(+(choice.price) * purchasing);
+                }
+            }
+            console.log(`${purchasing} of ${buy.buying} is up for purchase.`);
+            console.log(`Your total is $${total}`);
+            if (currentQty > purchasing) {
+                connection.query(
+                    "UPDATE products SET ? where ?", [{
+                        stock_quantity: newQty
+                    },
+                    {
+                        item_id: choice.item_id
+                    }
+                    ],
+                    function (error) {
+                        if (error) throw error;
+                        console.log("Purchsase was successful!");
                         shop();
                     }
-                })
-            });
-        };
-    });
+                )
+            } else {
+                console.log(`Not enough ${choice.product_name} for this order.`);
+                shop();
+            }
+        });
+    })
 }
