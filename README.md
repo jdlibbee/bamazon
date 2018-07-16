@@ -1,0 +1,1 @@
+This is a node application that wil take information from a customer, manager, or a supervisorto update a MYSQL database to keep track of products and departements. It utilizes different NPM packages to assist in properly reading and populating the information to the console. This app is a pretty great idea of how to utilize MYSQL. 

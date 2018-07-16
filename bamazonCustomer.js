@@ -67,10 +67,14 @@ function shop() {
             }
             console.log(`${purchasing} of ${buy.buying} is up for purchase.`);
             console.log(`Your total is $${total}`);
+            var grandTotal = choice.product_sales + total;
             if (currentQty > purchasing) {
                 connection.query(
-                    "UPDATE products SET ? where ?", [{
+                    "UPDATE products SET ?,? where ?", [{
                         stock_quantity: newQty
+                    },
+                    {
+                        product_sales: grandTotal
                     },
                     {
                         item_id: choice.item_id

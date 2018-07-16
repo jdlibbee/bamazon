@@ -37,5 +37,16 @@ VALUES
 INSERT into products
     (product_name, department_name, price, stock_quantity)
 VALUES
-    ("Earrings", "Women's Accessories", 20.95, 75); 
+    ("Earrings", "Women's Accessories", 20.95, 75);
 
+
+INSERT INTO departments
+    (department_name, over_head_costs)
+VALUES
+    ("Personal Care", 150),
+    ("Women's Accessories", 100),
+    ("Men's Accessories", 100),
+    ("Men's Clothing", 100),
+    ("Women's Clothing", 100),
+    ("Drinks", 100),
+    ("Baby Needs", 100); 
