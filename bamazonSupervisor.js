@@ -46,6 +46,7 @@ function depSales() {
     connection.query("select departments.department_id, departments.department_name, departments.over_head_costs, products.product_sales, departments.total_profit from departments INNER join products ON departments.department_name=products.department_name", function (err, res) {
         if (err) throw err;
         console.log(Table.print(res));
+        supervise();
     })
 };
 
@@ -67,5 +68,6 @@ function newDep() {
                 supervise();
             }
         )
+        supervise();
     });
 }
