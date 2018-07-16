@@ -2,6 +2,7 @@
 var inquirer = require("inquirer");
 var mysql = require("mysql");
 var pass = require("./config");
+var Table = require('easy-table');
 
 var connection = mysql.createConnection({
     host: "localhost",
@@ -51,7 +52,7 @@ function manage() {
 function forSale() {
     connection.query("Select * from products where stock_quantity > 0", function (err, res) {
         if (err) throw err;
-        console.log(res);
+        console.log(Table.print(res));
         manage();
         // for (var i = 0; i < res.lenght; i++) {
         // }
@@ -61,7 +62,7 @@ function forSale() {
 function lowInventory() {
     connection.query("Select * from products where stock_quantity < 5", function (err, res) {
         if (err) throw err;
-        console.log(res);
+        console.log(Table.print(res));
         manage();
         // for (var i = 0; i < res.lenght; i++) {
         // }
