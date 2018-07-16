@@ -1,1 +1,3 @@
-This is a node application that wil take information from a customer, manager, or a supervisorto update a MYSQL database to keep track of products and departements. It utilizes different NPM packages to assist in properly reading and populating the information to the console. This app is a pretty great idea of how to utilize MYSQL. 
+This is a node application that wil take information from a customer, manager, or a supervisorto update a MYSQL database to keep track of products and departements. It utilizes different NPM packages to assist in properly reading and populating the information to the console. This app is a pretty great idea of how to utilize MYSQL.
+
+The NPM packages that are being used are MYSQL, INQUIRER, and Easy-Table. MYSQL allows for easy access to update and read SQL tables. Inquirer allows for user input so that different functions can be implimented. The Easy-Table package allows for the table to be views in the console easily. 
